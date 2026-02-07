@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Matrix Strategic Report - تقارير استراتيجية متقدمة">
+    <meta name="theme-color" content="#020617">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Matrix Strategic Report | تقارير استراتيجية متقدمة</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700;900&family=Cairo:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1e40af;
+            --primary-light: #60a5fa;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --bg: #020617;
+            --bg-secondary: #0f172a;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, #0a0e27 50%, var(--bg) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, 10px); }
+        }
+
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Reading Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            z-index: 100;
+            width: 0%;
+            transition: width 0.05s ease;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--primary-light) 0%, var(--secondary) 100%);
+        }
+
+        /* Glass Effect */
+        .glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass:hover {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Typography */
+        .font-display {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .font-heading {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        /* Article Styles */
+        .article-body {
+            font-size: 1.125rem;
+            line-height: 2;
+            color: var(--text-secondary);
+            word-spacing: 0.05em;
+            text-align: justify;
+        }
+
+        .article-body p {
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .article-body p:hover {
+            color: var(--text-primary);
+        }
+
+        .article-body h2 {
+            color: var(--text-primary);
+            font-weight: 900;
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-right: 20px;
+            border-right: 5px solid var(--primary);
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.02em;
+            animation: slideInRight 0.6s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .article-body h3 {
+            color: var(--primary-light);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .article-body strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .article-body em {
+            color: var(--secondary);
+            font-style: italic;
+        }
+
+        .article-body ul, .article-body ol {
+            margin: 1.5rem 0;
+            padding-right: 2rem;
+        }
+
+        .article-body li {
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .article-body blockquote {
+            border-right: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 12px;
+            font-style: italic;
+            color: var(--primary-light);
+        }
+
+        .article-body code {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9em;
+            color: #60a5fa;
+        }
+
+        .article-body pre {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .article-body pre code {
+            background: none;
+            padding: 0;
+        }
+
+        /* Advertisement Box */
+        .ad-box {
+            min-height: 280px;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border: 2px dashed rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .ad-box:hover {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .ad-box::before {
+            content: 'ADVERTISEMENT';
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 11px;
+            color: var(--text-tertiary);
+            letter-spacing: 2px;
+            font-weight: 600;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .ad-placeholder {
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .breadcrumb a {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .breadcrumb a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb a:hover::after {
+            width: 100%;
+        }
+
+        .breadcrumb span {
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb .divider {
+            color: var(--text-tertiary);
+        }
+
+        /* Article Header */
+        .article-header {
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-tertiary);
+            margin-bottom: 2rem;
+        }
+
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .meta-badge:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .article-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2);
+            animation: zoomIn 0.8s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 2px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .faq-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .faq-container {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .faq-item {
+            glass-effect;
+            padding: 1.5rem;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateX(-8px);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .faq-item:hover::before {
+            left: 100%;
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .faq-question-icon {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            padding-right: 36px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Share Section */
+        .share-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .share-label {
+            color: var(--text-tertiary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .share-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .share-button:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Loading Animation */
+        .skeleton {
+            animation: skeleton-loading 1s linear infinite alternate;
+        }
+
+        @keyframes skeleton-loading {
+            0% {
+                background-color: rgba(59, 130, 246, 0.1);
+            }
+            100% {
+                background-color: rgba(59, 130, 246, 0.2);
+            }
+        }
+
+        /* Reading Time Indicator */
+        .reading-indicator {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+            display: none;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 1400px) {
+            .reading-indicator {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        .reading-progress {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) var(--progress, 0%), rgba(59, 130, 246, 0.2) 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.75rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .article-body {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .article-body h2 {
+                font-size: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .ad-box {
+                min-height: 200px;
+            }
+
+            .breadcrumb {
+                font-size: 0.85rem;
+                gap: 8px;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .progress-bar,
+            .breadcrumb,
+            .share-section,
+            .ad-box,
+            .reading-indicator {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .article-body {
+                color: #333;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Reading Indicator (Desktop Only) -->
+    <div class="reading-indicator">
+        <div class="reading-progress" id="readingProgress">
+            <span id="readingPercent">0%</span>
+        </div>
+        <span style="color: var(--text-tertiary); font-size: 0.8rem;">قراءة</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-16">
+        
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb">
+            <a href="index.html" class="flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-3m0 0l7-4 7 4M5 9v10a1 1 0 001 1h12a1 1 0 001-1V9m-9 11l4-4m0 0l4 4m-4-4v4"></path>
+                </svg>
+                الرئيسية
+            </a>
+            <span class="divider">/</span>
+            <span id="meta-category">تحليل</span>
+            <span class="divider">/</span>
+            <span id="reading-time" class="meta-badge">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
+                </svg>
+                <span id="reading-time-text">5 دقائق</span>
+            </span>
+        </nav>
+
+        <!-- Article Header -->
+        <header class="article-header">
+            <h1 id="post-title" class="article-title">جاري التحميل...</h1>
+
+            <!-- Article Meta Information -->
+            <div class="article-meta">
+                <div class="meta-badge">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zm-7 0c0 .83-.67 1.5-1.5 1.5S5 11.83 5 11s.67-1.5 1.5-1.5 1.5.67 1.5 1.5z"></path>
+                    </svg>
+                    <span id="post-date">اليوم</span>
+                </div>
+            </div>
+
+            <!-- Featured Image -->
+            <img id="post-image" class="article-image hidden" alt="صورة المقال" loading="eager">
+        </header>
+
+        <!-- Top Advertisement -->
+        <div id="ad-top" class="ad-box">
+            <div class="ad-placeholder">
+                📢 منطقة إعلانية
+            </div>
+        </div>
+
+        <!-- Article Body -->
+        <article id="post-body" class="article-body mb-16">
+            <div class="skeleton" style="height: 20px; margin-bottom: 16px; border-radius: 4px;"></div>
+            <div class="skeleton" style="height: 20px; margin-bottom: 16px; border-radius: 4px; width: 95%;"></div>
+            <div class="skeleton" style="height: 20px; margin-bottom: 16px; border-radius: 4px; width: 90%;"></div>
+        </article>
+
+        <!-- Bottom Advertisement -->
+        <div id="ad-bottom" class="ad-box">
+            <div class="ad-placeholder">
+                📢 منطقة إعلانية
+            </div>
+        </div>
+
+        <!-- Share Section -->
+        <div class="share-section">
+            <span class="share-label">شارك المقال:</span>
+            <a href="#" class="share-button" title="شارك على فيسبوك">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+                </svg>
+            </a>
+            <a href="#" class="share-button" title="شارك على تويتر">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+                </svg>
+            </a>
+            <a href="#" class="share-button" title="انسخ الرابط">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+            </a>
+        </div>
+
+        <!-- FAQ Section -->
+        <section id="faq-section" class="faq-section hidden">
+            <h2 class="faq-title">
+                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                الأسئلة الاستراتيجية الشائعة
+            </h2>
+            <div id="faq-container" class="faq-container"></div>
+        </section>
+
+    </main>
+
+    <script>
+        // ==================== Configuration ====================
+        const CONFIG = {
+            WORDS_PER_MINUTE: 200,
+            CACHE_DURATION: 3600000
+        };
+
+        // ==================== State Management ====================
+        const PageState = {
+            currentFile: null,
+            postData: null,
+            isLoading: true,
+
+            setLoading(value) {
+                this.isLoading = value;
+            }
+        };
+
+        // ==================== Reading Progress Tracker ====================
+        class ReadingTracker {
+            static init() {
+                window.addEventListener('scroll', () => {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+
+                    // Update progress bar
+                    document.getElementById("progressBar").style.width = scrolled + "%";
+
+                    // Update reading indicator
+                    const readingPercent = Math.min(Math.round(scrolled), 100);
+                    document.getElementById("readingPercent").textContent = readingPercent + "%";
+                    document.getElementById("readingProgress").style.setProperty('--progress', readingPercent + '%');
+                });
+            }
+        }
+
+        // ==================== Text Processing ====================
+        class TextProcessor {
+            static calculateReadingTime(text) {
+                const words = text.trim().split(/\s+/).length;
+                return Math.ceil(words / CONFIG.WORDS_PER_MINUTE);
+            }
+
+            static decryptAds(encryptedCode) {
+                try {
+                    return decodeURIComponent(escape(atob(encryptedCode)));
+                } catch (e) {
+                    console.error('Error decrypting ads:', e);
+                    return '';
+                }
+            }
+
+            static formatDate(dateString) {
+                try {
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString('ar-EG', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                } catch {
+                    return 'اليوم';
+                }
+            }
+
+            static sanitizeHTML(html) {
+                const temp = document.createElement('div');
+                temp.textContent = html;
+                return temp.innerHTML;
+            }
+
+            static parseMetadata(frontmatter) {
+                const metadata = {};
+                const lines = frontmatter.split('\n');
+
+                lines.forEach(line => {
+                    const colonIndex = line.indexOf(':');
+                    if (colonIndex !== -1) {
+                        const key = line.substring(0, colonIndex).trim();
+                        const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+                        metadata[key] = value;
+                    }
+                });
+
+                return metadata;
+            }
+        }
+
+        // ==================== Post Loader ====================
+        class PostLoader {
+            static async load() {
+                try {
+                    const fileName = new URLSearchParams(window.location.search).get('file');
+                    
+                    if (!fileName) {
+                        throw new Error('ملف المقال غير محدد');
+                    }
+
+                    PageState.currentFile = fileName;
+
+                    // Attempt to load from cache first
+                    const cached = this.getCached(fileName);
+                    if (cached) {
+                        this.render(cached);
+                        return;
+                    }
+
+                    // Load from server
+                    const response = await fetch(`content/posts/${encodeURIComponent(fileName)}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`فشل في تحميل المقال: ${response.status}`);
+                    }
+
+                    const content = await response.text();
+                    const postData = this.parse(content);
+
+                    // Cache the result
+                    this.cache(fileName, postData);
+                    this.render(postData);
+
+                } catch (error) {
+                    console.error('Error loading post:', error);
+                    this.showError(error.message);
+                }
+            }
+
+            static parse(content) {
+                try {
+                    const parts = content.split('---').filter(p => p.trim());
+                    
+                    if (parts.length < 2) {
+                        throw new Error('صيغة المقال غير صحيحة');
+                    }
+
+                    const metadata = TextProcessor.parseMetadata(parts[0]);
+                    const bodyContent = parts.slice(1).join('---').trim();
+
+                    return {
+                        ...metadata,
+                        body: bodyContent,
+                        faqs: this.extractFAQ(parts[0])
+                    };
+                } catch (error) {
+                    throw new Error('خطأ في تحليل المقال: ' + error.message);
+                }
+            }
+
+            static extractFAQ(frontmatter) {
+                try {
+                    const match = frontmatter.match(/faq:\s*(\[[\s\S]*?\])/);
+                    if (!match) return [];
+                    return JSON.parse(match[1]);
+                } catch {
+                    return [];
+                }
+            }
+
+            static render(postData) {
+                try {
+                    // Update title
+                    const title = postData.title || 'بدون عنوان';
+                    document.getElementById('post-title').textContent = title;
+                    document.title = title + ' | Matrix Strategic Report';
+
+                    // Update category
+                    const category = postData.category || 'عام';
+                    document.getElementById('meta-category').textContent = category;
+
+                    // Update date
+                    const date = TextProcessor.formatDate(postData.date);
+                    document.getElementById('post-date').textContent = date;
+
+                    // Update image
+                    if (postData.image && postData.image !== 'undefined') {
+                        const img = document.getElementById('post-image');
+                        img.src = postData.image;
+                        img.alt = title;
+                        img.classList.remove('hidden');
+                        img.onerror = () => img.classList.add('hidden');
+                    }
+
+                    // Update body content
+                    const bodyElement = document.getElementById('post-body');
+                    bodyElement.innerHTML = this.formatContent(postData.body);
+
+                    // Calculate and display reading time
+                    const readingTime = TextProcessor.calculateReadingTime(postData.body);
+                    document.getElementById('reading-time-text').textContent = readingTime + ' دقيقة';
+
+                    // Render advertisements
+                    if (postData.ads) {
+                        const decryptedAds = TextProcessor.decryptAds(postData.ads);
+                        if (decryptedAds) {
+                            document.getElementById('ad-top').innerHTML = decryptedAds;
+                            document.getElementById('ad-bottom').innerHTML = decryptedAds;
+                        }
+                    }
+
+                    // Render FAQs
+                    if (postData.faqs && postData.faqs.length > 0) {
+                        this.renderFAQs(postData.faqs);
+                    }
+
+                    // Update meta tags
+                    this.updateMetaTags(postData);
+
+                    PageState.setLoading(false);
+
+                } catch (error) {
+                    console.error('Error rendering post:', error);
+                    this.showError('حدث خطأ في عرض المقال');
+                }
+            }
+
+            static formatContent(content) {
+                // Convert simple markdown-like formatting
+                let formatted = content
+                    .replace(/\n{2,}/g, '</p><p>')
+                    .replace(/^## (.*?)$/gm, '<h2>$1</h2>')
+                    .replace(/^### (.*?)$/gm, '<h3>$1</h3>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+                return `<p>${formatted}</p>`;
+            }
+
+            static renderFAQs(faqs) {
+                const container = document.getElementById('faq-container');
+                const section = document.getElementById('faq-section');
+
+                if (faqs.length === 0) {
+                    section.classList.add('hidden');
+                    return;
+                }
+
+                container.innerHTML = faqs.map((faq, index) => `
+                    <div class="faq-item" style="animation-delay: ${index * 50}ms;">
+                        <div class="faq-question">
+                            <div class="faq-question-icon">●</div>
+                            <span>${TextProcessor.sanitizeHTML(faq.q)}</span>
+                        </div>
+                        <div class="faq-answer">
+                            ${TextProcessor.sanitizeHTML(faq.a)}
+                        </div>
+                    </div>
+                `).join('');
+
+                section.classList.remove('hidden');
+            }
+
+            static updateMetaTags(postData) {
+                // Update meta description
+                const description = postData.description || postData.body.substring(0, 160);
+                let metaDesc = document.querySelector('meta[name="description"]');
+                if (!metaDesc) {
+                    metaDesc = document.createElement('meta');
+                    metaDesc.name = 'description';
+                    document.head.appendChild(metaDesc);
+                }
+                metaDesc.content = description;
+
+                // Update Open Graph tags
+                this.setMetaTag('og:title', postData.title);
+                this.setMetaTag('og:description', description);
+                this.setMetaTag('og:image', postData.image);
+                this.setMetaTag('og:type', 'article');
+            }
+
+            static setMetaTag(property, content) {
+                let tag = document.querySelector(`meta[property="${property}"]`);
+                if (!tag) {
+                    tag = document.createElement('meta');
+                    tag.property = property;
+                    document.head.appendChild(tag);
+                }
+                tag.content = content;
+            }
+
+            static getCached(key) {
+                try {
+                    const cached = localStorage.getItem(`post_${key}`);
+                    if (!cached) return null;
+
+                    const { data, timestamp } = JSON.parse(cached);
+                    if (Date.now() - timestamp > CONFIG.CACHE_DURATION) {
+                        localStorage.removeItem(`post_${key}`);
+                        return null;
+                    }
+
+                    return data;
+                } catch {
+                    return null;
+                }
+            }
+
+            static cache(key, data) {
+                try {
+                    localStorage.setItem(`post_${key}`, JSON.stringify({
+                        data,
+                        timestamp: Date.now()
+                    }));
+                } catch {
+                    console.warn('Failed to cache post data');
+                }
+            }
+
+            static showError(message) {
+                const bodyElement = document.getElementById('post-body');
+                bodyElement.innerHTML = `
+                    <div style="padding: 2rem; background: rgba(239, 68, 68, 0.1); border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; text-align: center;">
+                        <h2 style="margin-bottom: 1rem; color: #ef4444;">خطأ</h2>
+                        <p>${TextProcessor.sanitizeHTML(message)}</p>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">
+                            <a href="index.html" style="color: var(--primary); text-decoration: underline;">العودة إلى الرئيسية</a>
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // ==================== Share Functionality ====================
+        class ShareHandler {
+            static init() {
+                const shareButtons = document.querySelectorAll('.share-button');
+                shareButtons.forEach((button, index) => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.handleShare(index);
+                    });
+                });
+            }
+
+            static handleShare(buttonIndex) {
+                const title = document.getElementById('post-title').textContent;
+                const url = window.location.href;
+
+                const shares = [
+                    () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`),
+                    () => window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`),
+                    () => {
+                        navigator.clipboard.writeText(url).then(() => {
+                            alert('تم نسخ الرابط بنجاح!');
+                        });
+                    }
+                ];
+
+                if (shares[buttonIndex]) {
+                    shares[buttonIndex]();
+                }
+            }
+        }
+
+        // ==================== Initialize ====================
+        document.addEventListener('DOMContentLoaded', async () => {
+            ReadingTracker.init();
+            ShareHandler.init();
+            await PostLoader.load();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Matrix Hub - منصة التحليلات المتقدمة والرؤى المستقبلية المعتمدة على البيانات">
+    <meta name="theme-color" content="#020617">
+    <title>Matrix Hub | المنصة الاستراتيجية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+            color: #f8fafc;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glow-effect:hover {
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.4);
+        }
+
+        .category-pill {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-pill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .category-pill:hover::before {
+            left: 100%;
+        }
+
+        .category-pill:hover,
+        .category-pill.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .post-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .post-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .post-card:hover::before {
+            opacity: 1;
+        }
+
+        .post-image {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .post-card:hover .post-image img {
+            transform: scale(1.1);
+        }
+
+        .shimmer {
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .read-more-btn {
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #e0e7ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .read-more-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-btn:hover::after {
+            transform: translateX(0);
+        }
+
+        .read-more-btn:hover {
+            color: #60a5fa;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(59, 130, 246, 0.2);
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .header-animation {
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .filter-active {
+            position: relative;
+        }
+
+        .filter-active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .search-input {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <!-- Header -->
+    <header class="py-12 px-6 border-b border-slate-900/50 bg-gradient-to-b from-slate-900/40 to-transparent header-animation">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-4 tracking-tighter">
+                MATRIX <span class="gradient-text">HUB</span>
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                منصة التحليلات المتقدمة والرؤى المستقبلية المعتمدة على البيانات الحقيقية والذكاء الاصطناعي.
+            </p>
+        </div>
+    </header>
+
+    <!-- Search & Filter Section -->
+    <div class="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-xl border-b border-slate-900/50 py-6">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-4 items-center mb-6">
+                <div class="w-full md:w-96 relative">
+                    <input 
+                        type="text" 
+                        id="search-input"
+                        placeholder="ابحث عن المقالات..." 
+                        class="w-full px-6 py-3 rounded-lg search-input focus:outline-none"
+                    >
+                    <svg class="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <button id="reset-filters" class="hidden md:block px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-bold transition duration-300">
+                    إعادة تعيين
+                </button>
+            </div>
+
+            <!-- Categories Navigation -->
+            <nav id="categories" class="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+                <button onclick="filterPosts('all')" class="category-pill active filter-active bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-2.5 rounded-full text-sm font-bold whitespace-nowrap shadow-lg">
+                    الكل
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto p-6">
+        <!-- Loading State -->
+        <div id="loading-state" class="flex flex-col items-center justify-center min-h-96">
+            <div class="loading-spinner mb-6"></div>
+            <p class="text-slate-400 text-lg">جاري تحميل المحتوى...</p>
+        </div>
+
+        <!-- Posts Grid -->
+        <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden empty-state">
+            <svg class="empty-state-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h3 class="text-xl font-bold text-white mb-2">لم نجد نتائج</h3>
+            <p class="text-slate-400">يرجى محاولة البحث بكلمات مختلفة أو اختيار فئة أخرى.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900/50 bg-gradient-to-t from-slate-900/20 to-transparent py-8 mt-16">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-slate-400 text-sm">
+                © 2024 Matrix Hub. جميع الحقوق محفوظة.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== Configuration ====================
+        const CONFIG = {
+            GITHUB_REPO: "medo7788/Archive-",
+            API_BASE: "https://api.github.com/repos",
+            CACHE_KEY: "matrixhub_posts",
+            CACHE_DURATION: 3600000 // 1 hour
+        };
+
+        // ==================== State Management ====================
+        const State = {
+            allPosts: [],
+            filteredPosts: [],
+            categories: new Set(),
+            currentFilter: 'all',
+            searchQuery: '',
+            isLoading: true,
+
+            addPost(post) {
+                this.allPosts.push(post);
+                if (post.category) {
+                    this.categories.add(post.category);
+                }
+            },
+
+            getFilteredPosts() {
+                let filtered = this.allPosts;
+
+                if (this.currentFilter !== 'all') {
+                    filtered = filtered.filter(p => p.category === this.currentFilter);
+                }
+
+                if (this.searchQuery) {
+                    const query = this.searchQuery.toLowerCase();
+                    filtered = filtered.filter(p =>
+                        p.title.toLowerCase().includes(query) ||
+                        (p.description && p.description.toLowerCase().includes(query)) ||
+                        (p.category && p.category.toLowerCase().includes(query))
+                    );
+                }
+
+                return filtered;
+            }
+        };
+
+        // ==================== Cache Management ====================
+        const Cache = {
+            set(key, data) {
+                try {
+                    localStorage.setItem(key, JSON.stringify({
+                        data,
+                        timestamp: Date.now()
+                    }));
+                } catch (e) {
+                    console.warn("Cache storage failed:", e);
+                }
+            },
+
+            get(key) {
+                try {
+                    const cached = localStorage.getItem(key);
+                    if (!cached) return null;
+
+                    const { data, timestamp } = JSON.parse(cached);
+                    if (Date.now() - timestamp > CONFIG.CACHE_DURATION) {
+                        localStorage.removeItem(key);
+                        return null;
+                    }
+
+                    return data;
+                } catch (e) {
+                    console.warn("Cache retrieval failed:", e);
+                    return null;
+                }
+            }
+        };
+
+        // ==================== API Functions ====================
+        async function fetchPosts() {
+            try {
+                // Check cache first
+                const cachedPosts = Cache.get(CONFIG.CACHE_KEY);
+                if (cachedPosts) {
+                    loadPostsFromData(cachedPosts);
+                    return;
+                }
+
+                const url = `${CONFIG.API_BASE}/${CONFIG.GITHUB_REPO}/contents/content/posts`;
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                const files = await response.json();
+
+                if (!Array.isArray(files)) {
+                    throw new Error("Invalid API response format");
+                }
+
+                const postPromises = files
+                    .filter(file => file.name.endsWith('.md'))
+                    .map(file => fetchPostContent(file));
+
+                const posts = await Promise.all(postPromises);
+                const validPosts = posts.filter(post => post !== null);
+
+                // Cache the results
+                Cache.set(CONFIG.CACHE_KEY, validPosts);
+
+                loadPostsFromData(validPosts);
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+                showErrorState(error.message);
+            }
+        }
+
+        async function fetchPostContent(file) {
+            try {
+                const response = await fetch(file.download_url);
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch ${file.name}`);
+                }
+
+                const content = await response.text();
+                return parseMarkdownFrontmatter(content, file.name);
+            } catch (error) {
+                console.error(`Error fetching ${file.name}:`, error);
+                return null;
+            }
+        }
+
+        function parseMarkdownFrontmatter(content, fileName) {
+            try {
+                const parts = content.split('---');
+                if (parts.length < 3) return null;
+
+                const metadata = {};
+                const lines = parts[1].trim().split('\n');
+
+                lines.forEach(line => {
+                    const colonIndex = line.indexOf(':');
+                    if (colonIndex !== -1) {
+                        const key = line.substring(0, colonIndex).trim();
+                        const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+                        metadata[key] = value;
+                    }
+                });
+
+                return {
+                    ...metadata,
+                    fileName,
+                    id: fileName.replace('.md', ''),
+                    title: metadata.title || 'بدون عنوان',
+                    category: metadata.category || 'عام',
+                    image: metadata.image || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop',
+                    description: metadata.description || '',
+                    date: metadata.date || new Date().toISOString()
+                };
+            } catch (error) {
+                console.error(`Error parsing frontmatter for ${fileName}:`, error);
+                return null;
+            }
+        }
+
+        // ==================== UI Rendering ====================
+        function loadPostsFromData(posts) {
+            State.allPosts = posts;
+            posts.forEach(post => {
+                State.categories.add(post.category);
+            });
+
+            renderCategories();
+            renderPosts(posts);
+            State.isLoading = false;
+            updateLoadingState();
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categories');
+            const existingButtons = container.querySelectorAll('.category-pill');
+            
+            // Keep the "All" button and add new categories
+            Array.from(State.categories).forEach(category => {
+                if (!Array.from(existingButtons).some(btn => btn.textContent.includes(category))) {
+                    const button = document.createElement('button');
+                    button.className = 'category-pill bg-slate-800 hover:bg-slate-700 px-6 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition duration-300';
+                    button.textContent = category;
+                    button.onclick = () => filterPosts(category);
+                    container.appendChild(button);
+                }
+            });
+        }
+
+        function renderPosts(posts) {
+            const grid = document.getElementById('posts-grid');
+            const loadingState = document.getElementById('loading-state');
+            const emptyState = document.getElementById('empty-state');
+
+            if (posts.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.classList.remove('hidden');
+
+            grid.innerHTML = posts.map((post, index) => `
+                <article class="post-card bg-slate-900/30 border border-slate-800/50 rounded-2xl overflow-hidden flex flex-col glow-effect fade-in" style="animation-delay: ${index * 50}ms">
+                    <div class="post-image">
+                        <img 
+                            src="${sanitizeImageUrl(post.image)}" 
+                            alt="${escapeHtml(post.title)}"
+                            loading="lazy"
+                            onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop'"
+                        >
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex items-center gap-2 mb-3 flex-wrap">
+                            <span class="badge">${escapeHtml(post.category || 'عام')}</span>
+                            ${post.date ? `<span class="text-xs text-slate-500">${formatDate(post.date)}</span>` : ''}
+                        </div>
+                        <h2 class="text-xl font-bold text-white mb-3 leading-tight line-clamp-2">
+                            ${escapeHtml(post.title)}
+                        </h2>
+                        ${post.description ? `<p class="text-slate-400 text-sm mb-4 line-clamp-2">${escapeHtml(post.description)}</p>` : ''}
+                        <div class="mt-auto">
+                            <a href="post.html?file=${encodeURIComponent(post.fileName)}" class="read-more-btn">
+                                قراءة التقرير الكامل
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+
+            loadingState.classList.add('hidden');
+        }
+
+        function filterPosts(category) {
+            State.currentFilter = category;
+            updateActiveFilter(category);
+            State.filteredPosts = State.getFilteredPosts();
+            renderPosts(State.filteredPosts);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function searchPosts(query) {
+            State.searchQuery = query.trim();
+            State.filteredPosts = State.getFilteredPosts();
+            renderPosts(State.filteredPosts);
+        }
+
+        function updateActiveFilter(category) {
+            document.querySelectorAll('.category-pill').forEach(pill => {
+                const isActive = pill.textContent.includes(category) || 
+                                (category === 'all' && pill.textContent.includes('الكل'));
+                
+                pill.classList.toggle('active', isActive);
+                pill.classList.toggle('filter-active', isActive);
+                pill.classList.toggle('bg-gradient-to-r', isActive);
+                pill.classList.toggle('from-blue-600', isActive);
+                pill.classList.toggle('to-blue-500', isActive);
+            });
+        }
+
+        function updateLoadingState() {
+            const loadingState = document.getElementById('loading-state');
+            const grid = document.getElementById('posts-grid');
+            loadingState.classList.add('hidden');
+            grid.classList.remove('hidden');
+        }
+
+        function showErrorState(message) {
+            const grid = document.getElementById('posts-grid');
+            const loadingState = document.getElementById('loading-state');
+
+            loadingState.classList.remove('hidden');
+            loadingState.innerHTML = `
+                <div class="text-center">
+                    <svg class="w-16 h-16 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3 class="text-xl font-bold text-white mb-2">خطأ في التحميل</h3>
+                    <p class="text-slate-400 mb-4">${escapeHtml(message)}</p>
+                    <button onclick="location.reload()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold transition">
+                        إعادة المحاولة
+                    </button>
+                </div>
+            `;
+        }
+
+        // ==================== Utility Functions ====================
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function sanitizeImageUrl(url) {
+            if (!url) return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop';
+            try {
+                new URL(url);
+                return url;
+            } catch {
+                return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop';
+            }
+        }
+
+        function formatDate(dateString) {
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('ar-EG', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            } catch {
+                return '';
+            }
+        }
+
+        // ==================== Event Listeners ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            let searchTimeout;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    searchPosts(e.target.value);
+                }, 300);
+            });
+
+            // Reset filters
+            document.getElementById('reset-filters').addEventListener('click', () => {
+                searchInput.value = '';
+                State.searchQuery = '';
+                State.currentFilter = 'all';
+                updateActiveFilter('all');
+                renderPosts(State.allPosts);
+            });
+
+            // Fetch posts on page load
+            fetchPosts();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + K for search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('search-input').focus();
+            }
+            // Escape to clear search
+            if (e.key === 'Escape') {
+                document.getElementById('search-input').value = '';
+                State.searchQuery = '';
+                renderPosts(State.allPosts);
+            }
+        });
+    </script>
+</body>
+</html>
