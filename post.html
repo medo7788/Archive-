@@ -2,71 +2,74 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title id="page-title">تحميل...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Reader</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        .prose img { border-radius: 1.5rem; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid #1e293b; margin: 2rem auto; }
-        .prose h2 { color: #3b82f6; font-weight: 900; font-size: 2.25rem; margin-top: 3rem; }
+        body { font-family: 'Cairo', sans-serif; background: #020617; color: #cbd5e1; line-height: 1.8; }
+        .content-area { font-size: 1.3rem; text-align: justify; } /* تكبير الخط */
+        .ad-slot { background: rgba(30, 41, 59, 0.5); border: 1px dashed #334155; margin: 25px 0; text-align: center; min-height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 15px; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-200">
-    <div class="max-w-4xl mx-auto px-6 py-20">
-        <header class="mb-16">
-            <div id="post-category" class="text-blue-500 font-black uppercase text-sm tracking-widest mb-4 text-center"></div>
-            <h1 id="post-title" class="text-4xl md:text-6xl font-black text-white text-center leading-tight"></h1>
-            <p id="post-meta" class="text-slate-400 text-xl text-center mt-6 italic"></p>
-        </header>
+<body class="p-5 md:p-10">
+    <div class="max-w-3xl mx-auto">
+        <a href="index.html" class="text-blue-500 font-bold mb-8 inline-block">← العودة للرئيسية</a>
+        
+        <h1 id="title" class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight"></h1>
+        <img id="image" class="w-full h-auto rounded-3xl mb-8 shadow-2xl border border-slate-800 hidden">
 
-        <img id="post-main-img" class="w-full h-[500px] object-cover rounded-[3rem] shadow-2xl mb-16 border border-slate-800">
+        <div id="ad-top" class="ad-slot"></div>
 
-        <div id="post-content" class="prose prose-invert prose-blue max-w-none text-lg leading-relaxed">
-            </div>
+        <div id="content" class="content-area space-y-6"></div>
 
-        <section id="faq-wrapper" class="mt-20 border-t border-slate-800 pt-10">
-            <h2 class="text-3xl font-bold mb-10 text-cyan-400">الأسئلة الشائعة (FAQ)</h2>
-            <div id="faq-list" class="space-y-6"></div>
-        </section>
+        <div id="ad-bottom" class="ad-slot"></div>
+
+        <div id="faq-section" class="mt-12 border-t border-slate-800 pt-8">
+            <h2 class="text-2xl font-black text-blue-500 mb-6 italic underline">أسئلة تهمك (FAQ)</h2>
+            <div id="faq-list" class="space-y-4"></div>
+        </div>
     </div>
 
-    <script type="application/ld+json" id="json-ld"></script>
-
     <script>
-        async function loadPost() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const fileName = urlParams.get('file');
-            const response = await fetch(`./content/posts/${fileName}`);
-            const raw = await response.text();
-
+        async function load() {
+            const file = new URLSearchParams(window.location.search).get('file');
+            const res = await fetch(`content/posts/${file}`);
+            const raw = await res.text();
             const parts = raw.split('---');
-            const meta = jsyaml.load(parts[1]);
-            const body = parts[2];
+            const meta = JSON.parse('{' + parts[1].split('\n').filter(l=>l.includes(':')).map(l => {
+                let [k, ...v] = l.split(':');
+                return `"${k.trim()}": "${v.join(':').trim().replace(/"/g, '')}"`;
+            }).join(',') + '}');
 
-            document.title = meta.title;
-            document.getElementById('post-title').innerText = meta.title;
-            document.getElementById('post-category').innerText = meta.category;
-            document.getElementById('post-meta').innerText = meta.meta;
-            document.getElementById('post-main-img').src = meta.image;
-            document.getElementById('post-content').innerHTML = marked.parse(body);
-
-            // بناء الـ FAQ والـ JSON-LD
-            if (meta.faq) {
-                const faqContainer = document.getElementById('faq-list');
-                const schemaFAQ = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [] };
-                
-                meta.faq.forEach(item => {
-                    faqContainer.innerHTML += `
-                        <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
-                            <h4 class="font-bold text-white mb-2 underline">🔹 ${item.q}</h4>
-                            <p class="text-slate-400">${item.a}</p>
-                        </div>`;
-                    schemaFAQ.mainEntity.push({ "@type": "Question", "name": item.q, "acceptedAnswer": { "@type": "Answer", "text": item.a } });
-                });
-                document.getElementById('json-ld').text = JSON.stringify(schemaFAQ);
+            document.getElementById('title').innerText = meta.title;
+            if(meta.image && meta.image !== 'undefined') {
+                const img = document.getElementById('image');
+                img.src = meta.image; img.classList.remove('hidden');
             }
+
+            // فك كود الإعلانات وحقنه في أماكنه
+            if(meta.ads) {
+                const ads = decodeURIComponent(escape(atob(meta.ads)));
+                document.getElementById('ad-top').innerHTML = ads;
+                document.getElementById('ad-bottom').innerHTML = ads;
+            }
+
+            document.getElementById('content').innerHTML = parts[2].trim().replace(/\n/g, '<br>');
+
+            // عرض الأسئلة
+            try {
+                const faqs = JSON.parse(parts[1].match(/faq: (\[.*\])/)[1]);
+                faqs.forEach(f => {
+                    document.getElementById('faq-list').innerHTML += `
+                        <div class="bg-slate-900/50 p-5 rounded-2xl border-r-4 border-blue-600">
+                            <h3 class="font-black text-blue-400 mb-2">${f.q}</h3>
+                            <p class="text-slate-400 text-sm">${f.a}</p>
+                        </div>`;
+                });
+            } catch(e){}
         }
-        loadPost();
+        load();
     </script>
 </body>
 </html>
