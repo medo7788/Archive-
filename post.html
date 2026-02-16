@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">مقال</title>
+<meta name="description" id="page-description" content="">
+<meta name="keywords" id="page-keywords" content="">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Medo7788">
+<meta property="og:type" content="article">
+<meta property="og:title" id="og-title" content="">
+<meta property="og:description" id="og-description" content="">
+<meta property="og:image" id="og-image" content="">
+<meta property="og:url" id="og-url" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="tw-title" content="">
+<meta name="twitter:description" id="tw-description" content="">
+<meta name="twitter:image" id="tw-image" content="">
+<link rel="canonical" id="canonical-url" href="">
+<script type="application/ld+json" id="schema-markup">{}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Cairo',sans-serif;background:#0f172a;color:#e2e8f0;}
+header{background:linear-gradient(135deg,rgba(30,64,175,0.1),rgba(15,23,42,0.8));backdrop-filter:blur(12px);border-bottom:1px solid rgba(59,130,246,0.1);position:sticky;top:0;z-index:50;}
+article{max-width:900px;margin:0 auto;padding:3rem 1.5rem;}
+h1{font-size:2.5rem;font-weight:900;margin-bottom:1.5rem;background:linear-gradient(135deg,#fff,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+h2{font-size:1.875rem;border-bottom:2px solid #3b82f6;padding-bottom:0.5rem;margin-top:2rem;margin-bottom:1rem;}
+h3{font-size:1.5rem;color:#3b82f6;margin-top:1.5rem;margin-bottom:1rem;}
+p{text-align:justify;margin-bottom:1.5rem;line-height:1.8;}
+.meta-info{background:rgba(59,130,246,0.1);border-right:4px solid #3b82f6;padding:1.5rem;margin-bottom:2rem;border-radius:0.5rem;}
+.meta-item{display:flex;gap:0.5rem;align-items:center;margin:0.5rem 0;}
+.meta-tag{display:inline-block;background:#3b82f6;color:white;padding:0.4rem 0.8rem;margin:0.3rem;border-radius:2rem;font-size:0.85rem;font-weight:500;}
+.meta-tag:hover{background:#1e40af;cursor:pointer;}
+img{max-width:100%;height:auto;margin:2rem 0;border-radius:0.75rem;box-shadow:0 10px 30px rgba(0,0,0,0.3);}
+.faq-item{background:#1e293b;border:1px solid #334155;padding:1.5rem;margin:1rem 0;border-radius:0.5rem;cursor:pointer;transition:all 0.3s;}
+.faq-item:hover{border-color:#3b82f6;box-shadow:0 4px 15px rgba(59,130,246,0.15);}
+.faq-question{color:#3b82f6;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+.faq-toggle{color:#3b82f6;font-weight:700;transition:transform 0.3s;}
+.faq-item.active .faq-toggle{transform:rotate(180deg);}
+.faq-answer{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid #334155;color:#cbd5e1;}
+.faq-item.active .faq-answer{display:block;}
+#disqus_thread{margin-top:3rem;border-top:2px solid #334155;padding-top:2rem;}
+.reading-time{display:inline-block;background:rgba(59,130,246,0.1);padding:0.4rem 0.8rem;border-radius:0.3rem;font-size:0.9rem;}
+.share-section{margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg,rgba(30,64,175,0.1),rgba(59,130,246,0.05));border:1px solid #334155;border-radius:0.75rem;text-align:center;}
+.share-btn{display:inline-block;padding:0.6rem 1.2rem;margin:0.3rem;background:#3b82f6;color:white;border:none;border-radius:0.5rem;cursor:pointer;font-weight:600;text-decoration:none;transition:all 0.3s;}
+.share-btn:hover{background:#1e40af;transform:translateY(-2px);}
+</style>
+</head>
+<body>
+<header>
+<div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+<a href="/" class="text-2xl font-black text-blue-400">📝 Medo7788</a>
+<nav class="flex gap-6">
+<a href="/" class="text-sm text-gray-400 hover:text-blue-400 transition">الرئيسية</a>
+<a href="/posts" class="text-sm text-gray-400 hover:text-blue-400 transition">المقالات</a>
+</nav>
+</div>
+</header>
+
+<article>
+<h1 id="article-title"></h1>
+
+<div class="meta-info">
+<div class="meta-item">
+<span>📅</span>
+<span id="article-date"></span>
+</div>
+<div class="meta-item">
+<span>👤</span>
+<span>Medo7788</span>
+</div>
+<div class="meta-item">
+<span>📚</span>
+<span id="article-category">عام</span>
+</div>
+<div class="meta-item">
+<span>⏱️</span>
+<span class="reading-time"><span id="reading-time">5</span> دقائق قراءة</span>
+</div>
+</div>
+
+<p id="article-description" style="display:none;font-size:1.1rem;font-style:italic;"></p>
+
+<img id="featured-image" style="display:none;" alt="">
+
+<div id="article-content" class="prose prose-lg max-w-none"></div>
+
+<div id="faq-section" style="display:none;margin-top:3rem;padding-top:2rem;border-top:2px solid #334155;">
+<h2>❓ الأسئلة الشائعة</h2>
+<div id="faq-list"></div>
+</div>
+
+<div class="share-section">
+<p class="font-semibold mb-3">📢 شارك هذا المقال</p>
+<a id="share-facebook" href="#" class="share-btn" target="_blank">Facebook</a>
+<a id="share-twitter" href="#" class="share-btn" target="_blank">X (Twitter)</a>
+<a id="share-whatsapp" href="#" class="share-btn" target="_blank">WhatsApp</a>
+<button onclick="copyLink()" class="share-btn">📋 نسخ الرابط</button>
+</div>
+
+<footer style="text-align:center;margin-top:3rem;padding-top:2rem;border-top:1px solid #334155;">
+<p id="keywords-container" class="text-sm text-slate-400 mb-4"></p>
+<p style="color:#94a3b8;font-size:0.875rem;">&copy; 2024 Medo7788 Blog | جميع الحقوق محفوظة</p>
+</footer>
+
+<div id="disqus_thread"></div>
+</article>
+
+<script>
+async function loadArticle(){
+const file=new URLSearchParams(location.search).get('file')||'post.md';
+try{
+const response=await fetch(`/posts/${file}`);
+if(!response.ok)throw new Error('المقال غير موجود');
+const markdown=await response.text();
+const match=markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+if(!match)throw new Error('صيغة المقال غير صحيحة');
+
+const frontmatter={};
+match[1].split('\n').forEach(line=>{
+const [key,...valueParts]=line.split(':');
+let value=valueParts.join(':').trim().replace(/^["']|["']$/g,'');
+if(key&&key.trim()){
+const cleanKey=key.trim();
+if(cleanKey==='faq'&&value.startsWith('[')){
+try{frontmatter[cleanKey]=JSON.parse(value);}catch{frontmatter[cleanKey]=[];}
+}else{frontmatter[cleanKey]=value;}
+}
+});
+
+const content=match[2];
+updateMetaTags(frontmatter);
+renderArticle(frontmatter,content);
+}catch(error){
+document.getElementById('article-content').innerHTML=`<p style="color:#ef4444;">❌ ${error.message}</p>`;
+}
+}
+
+function updateMetaTags(meta){
+const now=new Date().toISOString().split('T')[0];
+const pubDate=meta.datePublished||now;
+
+document.title=`${meta.title} - Medo7788 Blog`;
+document.getElementById('page-title').content=`${meta.title} - Medo7788 Blog`;
+document.getElementById('page-description').content=meta.description||meta.title;
+document.getElementById('page-keywords').content=meta.keywords||'';
+
+document.getElementById('og-title').content=meta.title;
+document.getElementById('og-description').content=meta.description||meta.title;
+document.getElementById('og-image').content=meta.image||'';
+document.getElementById('og-url').content=window.location.href;
+
+document.getElementById('tw-title').content=meta.title;
+document.getElementById('tw-description').content=meta.description||meta.title;
+document.getElementById('tw-image').content=meta.image||'';
+
+document.getElementById('canonical-url').href=window.location.href;
+
+const schema={
+"@context":"https://schema.org",
+"@type":"BlogPosting",
+"headline":meta.title,
+"description":meta.description||meta.title,
+"image":meta.image||'',
+"datePublished":pubDate,
+"dateModified":meta.dateModified||pubDate,
+"author":{"@type":"Person","name":"Medo7788"},
+"publisher":{"@type":"Organization","name":"Medo7788 Blog"},
+"keywords":meta.keywords||''
+};
+document.getElementById('schema-markup').textContent=JSON.stringify(schema,null,2);
+}
+
+function renderArticle(meta,content){
+document.getElementById('article-title').textContent=meta.title||'مقال';
+document.getElementById('article-date').textContent=meta.datePublished||new Date().toLocaleDateString('ar-EG');
+document.getElementById('article-category').textContent=meta.category||'عام';
+
+if(meta.description){
+const desc=document.getElementById('article-description');
+desc.textContent=meta.description;
+desc.style.display='block';
+}
+
+if(meta.image){
+const img=document.getElementById('featured-image');
+img.src=meta.image;
+img.alt=meta.title;
+img.style.display='block';
+}
+
+const htmlContent=marked.parse(content);
+document.getElementById('article-content').innerHTML=htmlContent;
+
+const readTime=Math.ceil(content.split(/\s+/).length/250);
+document.getElementById('reading-time').textContent=readTime;
+
+if(meta.keywords){
+const keywordsContainer=document.getElementById('keywords-container');
+const tags=meta.keywords.split(',').map(k=>`<span class="meta-tag">${k.trim()}</span>`).join('');
+keywordsContainer.innerHTML=`<strong>🏷️ الكلمات المفتاحية:</strong><br>${tags}`;
+}
+
+if(meta.faq&&Array.isArray(meta.faq)&&meta.faq.length>0){
+const faqList=document.getElementById('faq-list');
+faqList.innerHTML='';
+meta.faq.forEach(item=>{
+const faqDiv=document.createElement('div');
+faqDiv.className='faq-item';
+faqDiv.innerHTML=`
+<div class="faq-question" onclick="this.closest('.faq-item').classList.toggle('active')">
+<span>س: ${item.q}</span>
+<span class="faq-toggle">▼</span>
+</div>
+<div class="faq-answer">
+<p><strong>الإجابة:</strong> ${item.a}</p>
+</div>
+`;
+faqList.appendChild(faqDiv);
+});
+document.getElementById('faq-section').style.display='block';
+}
+
+const encodedUrl=encodeURIComponent(window.location.href);
+const encodedTitle=encodeURIComponent(meta.title);
+document.getElementById('share-facebook').href=`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+document.getElementById('share-twitter').href=`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+document.getElementById('share-whatsapp').href=`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
+
+window.disqus_config=function(){
+this.page.url=window.location.href;
+this.page.identifier='post-'+Date.now();
+this.page.title=meta.title;
+};
+
+const d=document,s=d.createElement('script');
+s.src='https://medo7788.disqus.com/embed.js';
+s.setAttribute('data-timestamp',+new Date());
+(d.head||d.body).appendChild(s);
+}
+
+function copyLink(){
+navigator.clipboard.writeText(window.location.href).then(()=>{
+alert('✅ تم نسخ الرابط!');
+}).catch(()=>{
+alert('❌ خطأ في النسخ');
+});
+}
+
+if(document.readyState==='loading'){
+document.addEventListener('DOMContentLoaded',loadArticle);
+}else{
+loadArticle();
+}
+</script>
+</body>
+</html>
